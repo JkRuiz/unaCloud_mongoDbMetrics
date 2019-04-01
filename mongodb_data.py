@@ -3,6 +3,7 @@ from pymongo import MongoClient
 import datetime
 import pprint
 import sys
+import time 
 
 columnsDelete = ['_id', 'ram', 'swap', 'disk', 'net_io_counters', 'vms', 'virtualbox_status', 'vbox_process_count', 'unacloud_status', 'rtt']
 # Dates with format Year,Month,Day,Hour,Minuts
@@ -21,6 +22,8 @@ try:
 
     print ("Ingresaste la fecha incial: \n Año: " + str(startDate[0]) + " \n Mes " + str(startDate[1]) + " \n Dia " + str(startDate[2]) + " \n Hora " + str(startDate[3]) + " \n Minutos " + str(startDate[4]))
 except:
+    print("La fecha ingresada no sigue el formato indicado, por favor revisar formato")
+    time.sleep(5)
     sys.exit("La fecha ingresada no sigue el formato indicado, por favor revisar formato")
 
 finalDate = input("Por favor ingrese la fecha limite/final para las consultas en la DB, debe ser bajo el formato Y/m/dTH:M (ej. 2019/04/17T0:0)")
@@ -37,6 +40,8 @@ try:
     print ("Ingresaste la fecha incial: \n Año: " + str(limitDate[0]) + " \n Mes " + str(limitDate[1]) + " \n Dia " + str(limitDate[2]) + " \n Hora " + str(limitDate[3]) + " \n Minutos " + str(limitDate[4]))
 
 except:
+    print("La fecha ingresada no sigue el formato indicado, por favor revisar formato")
+    time.sleep(5)
     sys.exit("La fecha ingresada no sigue el formato indicado, por favor revisar formato")
 
 # Connect to the mongo DB
@@ -50,9 +55,13 @@ try:
     startTotalDate = datetime.datetime(int(startDate[0]), int(startDate[1]), int(startDate[2]), int(startDate[3]), int(startDate[4])).strftime("%Y-%m-%dT%H:%M:%S")
     limitTotalDate = datetime.datetime(int(limitDate[0]), int(limitDate[1]), int(limitDate[2]), int(limitDate[3]), int(limitDate[4])).strftime("%Y-%m-%dT%H:%M:%S")
 except:
+    print("Ocurrio un error con las fechas ingresadas, revise los valores ingresados y el formato con el que se deben ingresar")
+    time.sleep(5)
     sys.exit("Ocurrio un error con las fechas ingresadas, revise los valores ingresados y el formato con el que se deben ingresar")
 
 if startTotalDate > limitTotalDate:
+    print("La fecha de inicio ingresada es mayor que la fecha limte ingresada, por favor revise los valores ingresados")
+    time.sleep(5)
     sys.exit("La fecha de inicio ingresada es mayor que la fecha limte ingresada, por favor revise los valores ingresados")
 
 print("Obteniendo las metricas de mongoDB...")
