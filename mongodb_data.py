@@ -3,9 +3,9 @@ from pymongo import MongoClient
 import datetime
 import pprint
 import sys
-import time 
+import time
 
-columnsDelete = ['_id', 'ram', 'swap', 'disk', 'net_io_counters', 'vms', 'virtualbox_status', 'vbox_process_count', 'unacloud_status', 'rtt']
+columnsDelete = ['_id', 'swap', 'net_io_counters', 'vms', 'virtualbox_status', 'vbox_process_count', 'unacloud_status', 'rtt']
 # Dates with format Year,Month,Day,Hour,Minuts
 startDate = []
 limitDate = []
@@ -20,7 +20,7 @@ try:
     startDate.append(restDate[1].split(":")[0])
     startDate.append(restDate[1].split(":")[1])
 
-    print ("Ingresaste la fecha incial: \n Año: " + str(startDate[0]) + " \n Mes " + str(startDate[1]) + " \n Dia " + str(startDate[2]) + " \n Hora " + str(startDate[3]) + " \n Minutos " + str(startDate[4]))
+    print ("Ingresaste la fecha incial: \n Año " + str(startDate[0]) + " \n Mes " + str(startDate[1]) + " \n Dia " + str(startDate[2]) + " \n Hora " + str(startDate[3]) + " \n Minutos " + str(startDate[4]))
 except:
     print("La fecha ingresada no sigue el formato indicado, por favor revisar formato")
     time.sleep(5)
